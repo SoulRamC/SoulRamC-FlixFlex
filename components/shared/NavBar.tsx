@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import { FiFilm, FiTv, FiUser } from "react-icons/fi";
 
@@ -11,12 +12,16 @@ const NavBar = () => {
             <span className="text-xl font-semibold">FlixFlex</span>
           </div>
           <div className="ml-4 font-bold">
-            <button className="hover:text-gray-300 focus:outline-none">
-              Movies
-            </button>
-            <button className="ml-4 hover:text-gray-300 focus:outline-none">
-              TV Series
-            </button>
+            <Link href="/movie">
+              <button className="hover:text-gray-300 focus:outline-none">
+                Movies
+              </button>
+            </Link>
+            <Link href="/tv">
+              <button className="ml-4 hover:text-gray-300 focus:outline-none">
+                TV Series
+              </button>
+            </Link>
           </div>
         </div>
         <div className="flex items-center space-x-4">

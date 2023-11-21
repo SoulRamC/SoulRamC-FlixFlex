@@ -4,13 +4,14 @@ interface Props {
   header: string;
   endpoint: string;
   query: string;
+  cardMedia: "movie" | "tv";
 }
 import Card from "./Card";
 
-async function CardContainer({ header, endpoint, query }: Props) {
-  let moviesData = await fetchMoviesTvData({ endpoint, query });
+async function CardContainer({ header, endpoint, query, cardMedia }: Props) {
+  const moviesData = await fetchMoviesTvData({ endpoint, query });
 
-  let movies = Array.isArray(moviesData.results)
+  const movies = Array.isArray(moviesData.results)
     ? moviesData.results.slice(0, 6)
     : [];
 
@@ -24,7 +25,14 @@ async function CardContainer({ header, endpoint, query }: Props) {
           <p>No movies found, please try again later</p>
         ) : (
           movies.map((movie: any) => (
-            <Card key={movie.id} imagePath={movie.poster_path} />
+            <Card
+              key={movie.id}
+              id={movie.id}
+              rating={movie.vote_average}
+              imagePath={movie.poster_path}
+              cardType="display"
+              cardMedia={cardMedia}
+            />
           ))
         )}
       </div>
