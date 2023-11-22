@@ -5,14 +5,14 @@ const userSchema = new mongoose.Schema({
   favoriteMovies: [
     {
       id: { type: Number, required: true },
-      rating: { type: Number, required: true },
+      rating: { type: Number, default: 0 },
       imagePath: { type: String, default: null },
     },
   ],
   favoriteSeries: [
     {
       id: { type: Number, required: true },
-      rating: { type: Number, required: true },
+      rating: { type: Number, default: 0 },
       imagePath: { type: String, default: null },
     },
   ],

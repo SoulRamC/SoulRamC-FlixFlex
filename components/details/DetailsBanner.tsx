@@ -1,15 +1,17 @@
 "use client";
-import React, { useState } from "react";
+import React, { ReactNode, useState } from "react";
 import Card from "../shared/Card";
 import TrailerAndRating from "./TrailerAndRating";
 import MovieStatus from "./MovieStatus";
 import dynamic from "next/dynamic";
+
 interface Props {
+  children: ReactNode;
   movieData: any;
   mediaType: "movie" | "tv";
 }
 
-function DetailsBanner({ movieData, mediaType }: Props) {
+function DetailsBanner({ children, movieData, mediaType }: Props) {
   const VideoPlayer = dynamic(() => import("../videoplayer/VideoPlayerPopUp"), {
     ssr: false,
   });
@@ -39,6 +41,7 @@ function DetailsBanner({ movieData, mediaType }: Props) {
             </span>
           ))}
         </div>
+        {children}
         <TrailerAndRating
           setShowVideo={setShowVideo}
           rating={movieData.vote_average}

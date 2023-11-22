@@ -4,13 +4,13 @@ import React from "react";
 import { FiFilm, FiUser, FiSearch } from "react-icons/fi";
 
 const NavBar = async () => {
-  const checkUser = async () => {
-    const user = await currentUser();
+  const user = await currentUser();
+  const checkUser = () => {
     return user !== null;
   };
 
   const renderAuthButtons = async () => {
-    const userExists = await checkUser();
+    const userExists = checkUser();
 
     if (userExists) {
       return <UserButton afterSignOutUrl="/sign-in"></UserButton>;
