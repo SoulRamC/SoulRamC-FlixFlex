@@ -1,27 +1,24 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import MoviesWrapper from "./MoviesWrapper";
-import SearchBar from "../shared/SearchBar";
+import SearchWrapper from "./SearchWrapper";
 import ClipLoader from "react-spinners/ClipLoader";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import Image from "next/image";
 import PaginationButtons from "../shared/PaginationButtons";
 
 interface MoviesContainerProps {
   search: string;
-  mediaType: "movie" | "tv";
 }
 
-function MoviesContainer({ search, mediaType }: MoviesContainerProps) {
-  const [movies, setMovies] = useState([]);
+function SearchContainer({ search }: MoviesContainerProps) {
+  const [results, setResults] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
   let url = "";
 
   if (search === "") {
-    url = `https://api.themoviedb.org/3/${mediaType}/popular?language=en-US&page=${page}`;
+    url = `https://api.themoviedb.org/3/trending/all/day`;
   } else {
-    url = `https://api.themoviedb.org/3/search/${mediaType}?query=${search}&include_adult=false&language=en-US&page=${page}`;
+    url = `https://api.themoviedb.org/3/search/multi?query=${search}&include_adult=false&language=en-US&page=${page}`;
   }
 
   useEffect(() => {
@@ -36,10 +33,22 @@ function MoviesContainer({ search, mediaType }: MoviesContainerProps) {
     })
       .then((res) => res.json())
       .then((data) => {
-        setMovies(data.results);
+        let filteredResults;
+
+        // Conditionally filter results if search is not empty
+        if (search !== "") {
+          filteredResults = data.results.filter(
+            (result: any) =>
+              result.media_type === "movie" || result.media_type === "tv",
+          );
+        } else {
+          filteredResults = data.results;
+        }
+
+        setResults(filteredResults);
         setLoading(false);
       });
-  }, [url]);
+  }, [url, search, page]);
 
   const handlePageChange = (newPage: number) => {
     if (newPage > 0) {
@@ -55,7 +64,7 @@ function MoviesContainer({ search, mediaType }: MoviesContainerProps) {
     );
   }
 
-  if (!movies || movies.length === 0) {
+  if (!results || results.length === 0) {
     return (
       <div className="w-screen h-full flex flex-col items-center">
         <h1 className="text-4xl">No Result Found</h1>
@@ -71,9 +80,14 @@ function MoviesContainer({ search, mediaType }: MoviesContainerProps) {
 
   return (
     <div className="w-screen h-full flex flex-col items-center">
-      <PaginationButtons page={page} handlePageChange={handlePageChange} />
-      <MoviesWrapper mediaType={mediaType} movies={movies}></MoviesWrapper>
       <PaginationButtons
+        search={search}
+        page={page}
+        handlePageChange={handlePageChange}
+      />
+      <SearchWrapper movies={results}></SearchWrapper>
+      <PaginationButtons
+        search={search}
         page={page}
         handlePageChange={handlePageChange}
       ></PaginationButtons>
@@ -81,4 +95,4 @@ function MoviesContainer({ search, mediaType }: MoviesContainerProps) {
   );
 }
 
-export default MoviesContainer;
+export default SearchContainer;

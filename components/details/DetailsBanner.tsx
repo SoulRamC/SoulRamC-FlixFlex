@@ -16,17 +16,19 @@ function DetailsBanner({ movieData, mediaType }: Props) {
   const videoUrl = movieData?.videos?.results[0]?.key;
   const [showVideo, setShowVideo] = useState(false);
   return (
-    <div className="flex relative w-full h-3/4 pt-10 justify-center text-ellipsis gap-10 items-center">
+    <div className="flex max-sm:flex-col flex-colrelative w-full h-3/4 pt-10 justify-center text-ellipsis gap-10 items-center">
       <Card
         cardMedia="movie"
         imagePath={movieData?.poster_path}
         cardType={`details`}
       />
-      <div className="flex h-full gap-3 flex-col justify-start items-start">
-        <h1 className="text-4xl w-[30vw] italic font-bold">
+      <div className="flex h-full gap-3 flex-col max-sm:items-center justify-start items-start">
+        <h1 className="text-4xl w-[30vw] max-sm:w-[40vw] max-sm:text-center italic font-bold">
           {mediaType === "tv" ? movieData?.name : movieData?.title}
         </h1>
-        <span className="text-lg text-gray-500">{movieData?.tagline}</span>
+        <span className="text-lg text-gray-500 max-sm:text-center">
+          {movieData?.tagline}
+        </span>
         <div className="flex gap-3">
           {movieData.genres?.map((genre: any) => (
             <span
@@ -41,7 +43,7 @@ function DetailsBanner({ movieData, mediaType }: Props) {
           setShowVideo={setShowVideo}
           rating={movieData.vote_average}
         />
-        <div className="flex gap-3 flex-col w-[30vw]">
+        <div className="flex gap-3 flex-col max-sm:text-center max-sm:w-[70vw] w-[30vw]">
           <h2 className="text-2xl font-bold">Overview</h2>
           <span className="text-lg text-gray-500">{movieData.overview}</span>
         </div>
@@ -60,7 +62,7 @@ function DetailsBanner({ movieData, mediaType }: Props) {
           }
         ></MovieStatus>
         <div
-          className={`absolute top-10 left-96 h-full w-1/2 flex justify-center items-center ${
+          className={`absolute top-17 left-96 h-full w-1/2 flex justify-center items-center ${
             !showVideo && "hidden"
           } `}
         >

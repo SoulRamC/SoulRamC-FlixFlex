@@ -12,7 +12,7 @@ function MovieStatus({
   mediaType,
 }: MovieStatusProps) {
   return (
-    <div className="flex pb-10 gap-5">
+    <div className="flex pb-10 max-sm:px-10 gap-5">
       <div>
         <span className="text-md font-bold">
           Status: <span className="text-gray-400 font-normal">{status}</span>

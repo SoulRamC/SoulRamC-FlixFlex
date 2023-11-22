@@ -14,7 +14,12 @@ interface Props {
 
 function Card({ id, rating, imagePath, cardType, cardMedia }: Props) {
   const router = useRouter();
-  const imageUrl = `https://image.tmdb.org/t/p/w500${imagePath}`;
+  let imageUrl = "";
+  if (!imagePath) {
+    imageUrl = "/assets/no-poster.png";
+  } else {
+    imageUrl = `https://image.tmdb.org/t/p/w500${imagePath}`;
+  }
 
   return (
     <div
@@ -25,14 +30,13 @@ function Card({ id, rating, imagePath, cardType, cardMedia }: Props) {
       }
       className={`flex ${
         cardType === "display" ? "hover:scale-105 hover:cursor-pointer" : ""
-      } transition transform duration-300 ease-out rounded-lg flex-col items-center max-w-[40vw]`}
+      } transition transform duration-300 ease-out rounded-lg flex-col items-center max-w-[40vw] max-sm:max-w-[75vw]`}
     >
       <div
         className={`relative w-full ${
           cardType === "details" ? "h-[55vh]" : "h-[40vh]"
         } rounded-lg mb-2 shadow-lg`}
       >
-        {" "}
         <Image
           width={500}
           height={500}
@@ -40,11 +44,15 @@ function Card({ id, rating, imagePath, cardType, cardMedia }: Props) {
           alt="moviePoster"
           className="w-full h-full rounded-lg object-cover"
         />
-        {rating && (
+        {rating ? (
           <CircularRating
             pageType="display"
             rating={rating || 0}
           ></CircularRating>
+        ) : cardType === "display" ? (
+          <CircularRating pageType="display" rating={0}></CircularRating>
+        ) : (
+          ""
         )}
       </div>
     </div>

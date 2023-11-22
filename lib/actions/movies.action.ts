@@ -3,7 +3,7 @@ interface Props {
   query?: string;
 }
 
-const fetchMoviesData = async ({ endpoint, query }: Props) => {
+const fetchMoviesTvData = async ({ endpoint, query }: Props) => {
   const url = `https://api.themoviedb.org/3/${endpoint}?${query}`;
 
   try {
@@ -23,4 +23,4 @@ const fetchMoviesData = async ({ endpoint, query }: Props) => {
   }
 };
 
-export default fetchMoviesData;
+export default fetchMoviesTvData;

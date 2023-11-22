@@ -15,7 +15,7 @@ async function page({ params }: { params: { id: string } }) {
         className="w-full bg-cover inset-0 bg-gradient-to-t from-transparent to-gray-900 opacity-10 fixed h-full z-[-1]"
         style={{ backgroundImage: `url('${backgroundImage}')` }}
       ></div>
-      <section className="h-[80vh] relative w-full flex items-center justify-start">
+      <section className="h-[80vh] max-sm:pt-20 max-sm:h-full relative w-full flex items-center justify-start">
         <DetailsBanner mediaType="movie" movieData={movieData}></DetailsBanner>
       </section>
     </div>
