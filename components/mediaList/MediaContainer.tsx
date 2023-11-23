@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import MoviesWrapper from "./MoviesWrapper";
+import MediaWrapper from "./MediaWrapper";
 import SearchBar from "../shared/SearchBar";
 import ClipLoader from "react-spinners/ClipLoader";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
@@ -12,7 +12,7 @@ interface MoviesContainerProps {
   mediaType: "movie" | "tv";
 }
 
-function MoviesContainer({ search, mediaType }: MoviesContainerProps) {
+function MediaContainer({ search, mediaType }: MoviesContainerProps) {
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
@@ -72,7 +72,7 @@ function MoviesContainer({ search, mediaType }: MoviesContainerProps) {
   return (
     <div className="w-screen h-full flex flex-col items-center">
       <PaginationButtons page={page} handlePageChange={handlePageChange} />
-      <MoviesWrapper mediaType={mediaType} movies={movies}></MoviesWrapper>
+      <MediaWrapper mediaType={mediaType} movies={movies}></MediaWrapper>
       <PaginationButtons
         page={page}
         handlePageChange={handlePageChange}
@@ -81,4 +81,4 @@ function MoviesContainer({ search, mediaType }: MoviesContainerProps) {
   );
 }
 
-export default MoviesContainer;
+export default MediaContainer;

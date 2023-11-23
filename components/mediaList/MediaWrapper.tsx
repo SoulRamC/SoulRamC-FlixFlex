@@ -4,7 +4,7 @@ interface MoviesWrapperProps {
   movies: any[];
   mediaType: "movie" | "tv";
 }
-function MoviesWrapper({ movies, mediaType }: MoviesWrapperProps) {
+function MediaWrapper({ movies, mediaType }: MoviesWrapperProps) {
   return (
     <section className="flex flex-col gap-5 max-w-[90vw] w-[90vw]">
       <div className="flex flex-row gap-5 flex-wrap justify-center">
@@ -27,4 +27,4 @@ function MoviesWrapper({ movies, mediaType }: MoviesWrapperProps) {
   );
 }
 
-export default MoviesWrapper;
+export default MediaWrapper;

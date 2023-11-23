@@ -1,6 +1,6 @@
 import React from "react";
 import CardsContainer from "../shared/CardsContainer";
-function SeriesOnDisplay() {
+function MediaOnDisplay() {
   return (
     <div className="flex flex-col gap-10 pb-5">
       <CardsContainer
@@ -31,4 +31,4 @@ function SeriesOnDisplay() {
   );
 }
 
-export default SeriesOnDisplay;
+export default MediaOnDisplay;

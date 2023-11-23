@@ -1,5 +1,5 @@
 import HeroSection from "@/components/homePage/Hero";
-import SeriesOnDisplay from "@/components/homePage/SeriesOnDisplay";
+import MediaOnDisplay from "@/components/homePage/MediaOnDisplay";
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import { updateUser } from "../../lib/actions/user.action";
@@ -12,7 +12,7 @@ export default async function Home() {
         <HeroSection />
       </section>
       <section className="w-full h-full flex justify-center pb-10">
-        <SeriesOnDisplay />
+        <MediaOnDisplay />
       </section>
     </div>
   );

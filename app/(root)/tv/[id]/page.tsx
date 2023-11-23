@@ -3,7 +3,7 @@ import FavoriteButton from "@/components/shared/FavoriteButton";
 import fetchMoviesTvData from "@/lib/actions/movies.action";
 import {
   deleteFavoriteSeries,
-  isSeriesInDatabase,
+  isSeriesInUserFavorites,
   updateFavoriteSeries,
 } from "@/lib/actions/user.action";
 import { currentUser } from "@clerk/nextjs";
@@ -12,18 +12,21 @@ import React from "react";
 async function page({ params }: { params: { id: string } }) {
   const endpoint = `tv/${params.id}`;
   const user = await currentUser();
+  if (!user) return null;
   const query = "append_to_response=videos";
   const movieData = (await fetchMoviesTvData({ endpoint, query })) || [];
   const backgroundImage = `https://image.tmdb.org/t/p/original${movieData.backdrop_path}`;
 
-  const seriesItem = {
+  const seriesItem: any = {
     id: params.id,
     rating: movieData.vote_average,
     imagePath: movieData.poster_path,
   };
 
-  const isFavorite = await isSeriesInDatabase(parseInt(params.id));
-  console.log(isFavorite);
+  const isFavorite = await isSeriesInUserFavorites({
+    userId: user?.id,
+    seriesId: parseInt(params.id),
+  });
   const addToFavorites = async () => {
     "use server";
     if (!isFavorite) {
@@ -31,7 +34,10 @@ async function page({ params }: { params: { id: string } }) {
       await updateFavoriteSeries({ userId: user?.id, series: seriesItem });
     } else {
       ("use server");
-      await deleteFavoriteSeries({ userId: user?.id, seriesId: params.id });
+      await deleteFavoriteSeries({
+        userId: user?.id,
+        seriesId: parseInt(params.id),
+      });
     }
   };
 

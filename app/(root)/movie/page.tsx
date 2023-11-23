@@ -1,5 +1,5 @@
 "use client";
-import MoviesContainer from "@/components/movie/MoviesContainer";
+import MediaContainer from "@/components/mediaList/MediaContainer";
 import SearchBar from "@/components/shared/SearchBar";
 import React, { useState } from "react";
 
@@ -14,7 +14,7 @@ function Page() {
         <SearchBar setSearch={setSearch} />
       </section>
       <section className="w-[80vw] h-full flex justify-center items-center">
-        <MoviesContainer mediaType="movie" search={search} />
+        <MediaContainer mediaType="movie" search={search} />
       </section>
     </div>
   );
