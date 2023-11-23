@@ -61,7 +61,7 @@ lib/actions/: Hold the actions for the database that use the server actions of n
 
 ## View the Deployed application:
 
-[Deployed Application](https://soul-ram-c-flix-flex.vercel.app/])
+[Deployed Application](https://soul-ram-c-flix-flex.vercel.app)
 
 # Getting Started Locally:
 
