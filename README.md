@@ -78,6 +78,12 @@ NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
 NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/
 NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
 
+## Install dependencies:
+
+```bash
+npm install
+```
+
 ## Start the development server:
 
 First, run the development server:
