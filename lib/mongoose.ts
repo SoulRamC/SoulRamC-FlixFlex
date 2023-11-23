@@ -1,3 +1,7 @@
+/*
+ * This file is used for connecting to the database and export the function.
+ * */
+
 import mongoose from "mongoose";
 
 let isConnected = false;

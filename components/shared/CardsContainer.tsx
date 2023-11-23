@@ -1,4 +1,4 @@
-import fetchMoviesTvData from "@/lib/actions/movies.action";
+import fetchMoviesTvData from "@/lib/actions/tmdb.action";
 import React from "react";
 interface Props {
   header: string;

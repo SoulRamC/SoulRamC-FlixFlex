@@ -1,6 +1,6 @@
 import DetailsBanner from "@/components/details/DetailsBanner";
 import FavoriteButton from "@/components/shared/FavoriteButton";
-import fetchMoviesTvData from "@/lib/actions/movies.action";
+import fetchMoviesTvData from "@/lib/actions/tmdb.action";
 import {
   deleteFavoriteSeries,
   isSeriesInUserFavorites,

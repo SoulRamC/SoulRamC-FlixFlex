@@ -1,3 +1,7 @@
+/*
+ * This file hold the model for mongoDb where the user data is stored.
+ * */
+
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
@@ -17,6 +21,8 @@ const userSchema = new mongoose.Schema({
     },
   ],
 });
+
+/* Push the model to the database or pull the existing model and export it */
 
 const User = mongoose.models.User || mongoose.model("User", userSchema);
 
