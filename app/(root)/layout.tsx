@@ -20,12 +20,9 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={`${inter.className} bg-gray-900`}>
-          <main className="w-full h-full text-gray-50">
-            <NavBar></NavBar>
-            {children}
-            <Footer></Footer>
-          </main>
+        <body className={`${inter.className} bg-gray-900 flex flex-col`}>
+          <NavBar></NavBar>
+          <main className="w-full h-full text-gray-50">{children}</main>
         </body>
       </html>
     </ClerkProvider>

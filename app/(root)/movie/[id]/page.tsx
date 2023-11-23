@@ -42,10 +42,8 @@ async function page({ params }: { params: { id: string } }) {
     }
   };
 
-
-  
   return (
-    <div className="w-[100vw] relative h-full flex flex-col justify-center items-center">
+    <div className="w-[100vw] relative pt-5 h-1/2 flex flex-col justify-center items-center">
       <div
         className="w-full bg-cover inset-0 bg-gradient-to-t from-transparent to-gray-900 opacity-10 fixed h-full z-[-1]"
         style={{ backgroundImage: `url('${backgroundImage}')` }}

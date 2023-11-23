@@ -46,7 +46,7 @@ function DetailsBanner({ children, movieData, mediaType }: Props) {
           setShowVideo={setShowVideo}
           rating={movieData.vote_average}
         />
-        <div className="flex gap-3 flex-col max-sm:text-center max-sm:w-[70vw] w-[30vw]">
+        <div className="flex gap-3 flex-col max-sm:text-center max-sm:w-[70vw] w-[40vw]">
           <h2 className="text-2xl font-bold">Overview</h2>
           <span className="text-lg text-gray-500">{movieData.overview}</span>
         </div>
