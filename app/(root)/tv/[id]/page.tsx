@@ -1,13 +1,39 @@
 import DetailsBanner from "@/components/details/DetailsBanner";
-import Card from "@/components/shared/Card";
+import FavoriteButton from "@/components/shared/FavoriteButton";
 import fetchMoviesTvData from "@/lib/actions/movies.action";
+import {
+  deleteFavoriteSeries,
+  isSeriesInDatabase,
+  updateFavoriteSeries,
+} from "@/lib/actions/user.action";
+import { currentUser } from "@clerk/nextjs";
 import React from "react";
 
 async function page({ params }: { params: { id: string } }) {
   const endpoint = `tv/${params.id}`;
+  const user = await currentUser();
   const query = "append_to_response=videos";
   const movieData = (await fetchMoviesTvData({ endpoint, query })) || [];
   const backgroundImage = `https://image.tmdb.org/t/p/original${movieData.backdrop_path}`;
+
+  const seriesItem = {
+    id: params.id,
+    rating: movieData.vote_average,
+    imagePath: movieData.poster_path,
+  };
+
+  const isFavorite = await isSeriesInDatabase(parseInt(params.id));
+  console.log(isFavorite);
+  const addToFavorites = async () => {
+    "use server";
+    if (!isFavorite) {
+      ("use server");
+      await updateFavoriteSeries({ userId: user?.id, series: seriesItem });
+    } else {
+      ("use server");
+      await deleteFavoriteSeries({ userId: user?.id, seriesId: params.id });
+    }
+  };
 
   return (
     <div className="w-[100vw] relative h-full flex flex-col justify-center items-center">
@@ -16,7 +42,12 @@ async function page({ params }: { params: { id: string } }) {
         style={{ backgroundImage: `url('${backgroundImage}')` }}
       ></div>
       <section className="h-[80vh] relative w-full flex items-center justify-start">
-        <DetailsBanner movieData={movieData} mediaType="tv"></DetailsBanner>
+        <DetailsBanner movieData={movieData} mediaType="tv">
+          <FavoriteButton
+            isFavorite={isFavorite}
+            handleAddToFavorites={addToFavorites}
+          ></FavoriteButton>
+        </DetailsBanner>
       </section>
     </div>
   );

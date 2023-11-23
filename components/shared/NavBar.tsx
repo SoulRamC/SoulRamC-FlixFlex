@@ -61,6 +61,11 @@ const NavBar = async () => {
           <Link href="/search" className="md:block">
             <FiSearch className="text-xl text-red-500" />
           </Link>
+          <Link href="/favorite">
+            <button className="hover:text-gray-300 font-bold focus:outline-none">
+              Favorites
+            </button>
+          </Link>
           {await renderAuthButtons()}
         </div>
       </div>

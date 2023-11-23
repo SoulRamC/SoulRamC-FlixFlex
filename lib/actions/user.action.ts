@@ -179,3 +179,41 @@ export async function deleteFavoriteSeries({
     mediaType: "favoriteSeries",
   });
 }
+
+interface CheckMediaParams {
+  mediaId: number;
+  mediaType: "favoriteMovies" | "favoriteSeries";
+}
+
+export async function isMediaInDatabase({
+  mediaId,
+  mediaType,
+}: CheckMediaParams): Promise<boolean> {
+  try {
+    connectToDB();
+
+    const userCount = await User.countDocuments({
+      [mediaType]: { $elemMatch: { id: mediaId } },
+    });
+
+    return userCount > 0;
+  } catch (error: any) {
+    throw new Error(
+      `Failed to check if media is in the database: ${error.message}`,
+    );
+  }
+}
+
+export async function isMovieInDatabase(movieId: number): Promise<boolean> {
+  return await isMediaInDatabase({
+    mediaId: movieId,
+    mediaType: "favoriteMovies",
+  });
+}
+
+export async function isSeriesInDatabase(seriesId: number): Promise<boolean> {
+  return await isMediaInDatabase({
+    mediaId: seriesId,
+    mediaType: "favoriteSeries",
+  });
+}

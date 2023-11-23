@@ -5,6 +5,7 @@ import fetchMoviesTvData from "@/lib/actions/movies.action";
 import {
   deleteFavoriteMovie,
   getFavoriteMovies,
+  isMovieInDatabase,
   updateFavoriteMovies,
 } from "@/lib/actions/user.action";
 import { currentUser } from "@clerk/nextjs";
@@ -22,10 +23,8 @@ async function page({ params }: { params: { id: string } }) {
     imagePath: movieData.poster_path,
   };
 
-  const userFavoriteMovies = await getFavoriteMovies({ userId: user?.id });
-  const isFavorite = userFavoriteMovies.some(
-    (item: any) => item.id == params.id,
-  );
+  const isFavorite = await isMovieInDatabase(parseInt(params.id));
+  console.log(isFavorite);
   const addToFavorites = async () => {
     "use server";
     if (!isFavorite) {
