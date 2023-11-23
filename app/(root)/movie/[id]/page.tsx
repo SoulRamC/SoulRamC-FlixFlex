@@ -27,7 +27,6 @@ async function page({ params }: { params: { id: string } }) {
     userId: user?.id,
     movieId: parseInt(params.id),
   });
-  console.log(isFavorite);
   const addToFavorites = async () => {
     "use server";
     if (!isFavorite) {
